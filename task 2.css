@@ -1,86 +1,69 @@
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: gray;
-
 }
 
+/* Header Styles */
 header {
-    background-color: yellow;
-    color: black;
-    padding: 10px;
-    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
 }
 
-nav {
-    background-color: thistle;
-    color: red;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main Content Styles */
+main {
     padding: 20px;
-    text-align: center;
 }
 
+article a{
+    text-decoration: blink;
+}
 section {
-    padding: 20px;
-}
-
-.Course {
-    border: 1px solid #ddd;
-    background-color: white;
     margin-bottom: 20px;
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
 }
 
-.Course img {
-    max-width: 220px;
-    float: left;
-    margin-right: 30px;
-    border-radius: 20px;
-}
-
-.Course h2 {
-    margin-top: 0;
-    font-size: 1.5em;
-}
-
-.Course p {
-    margin: 10px 0;
-}
-
+/* Footer Styles */
 footer {
     background-color: #333;
-    color: white;
+    color: #fff;
     text-align: center;
-    padding: 5px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    padding: 10px 0;
 }
 
-@media (max-width: 978px){
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: gray;
-
+.container
+{
+    width:960 px;
+    margin : 0 auto;
 }
-    .Course{
-        margin: auto;
-    }
 
+@media(max-width: 768px)
+{
+.container{
+    width: 720px;
 }
-@media (max-width: 500px){
-
-    .Course{
+}
+@media(max-width: 480px)
+{
+    .container{
         width: 100%;
-    }
-    .footer{
-        width: 100%;
-    }
-
+        paddding: 10px;
+    }
 }
