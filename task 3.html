@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: block;
+            margin-top: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: -8px;
+            margin-bottom: 10px;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+        }
+        .skill-input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .skill-input-group input {
+            flex-grow: 1;
+        }
+        .skill-input-group button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .skill-input-group button:hover {
+            background-color: #0056b3;
+        }
+        .skill-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skill-list li {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Data Collection Form</h2>
+        <form id="dataForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span class="error" id="nameError"></span>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="emailError"></span>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <span class="error" id="phoneError"></span>
+            
+            <label for="course">Course of Internship:</label>
+            <div class="dropdown">
+                <select id="course" name="course">
+                    <option value="webDevelopment">Web Development</option>
+                    <option value="dataScience">Data Science</option>
+                    <option value="cyberSecurity">Cyber Security</option>
+                    <option value="aiMl">AI/ML</option>
+                </select>
+            </div>
+            
+            <label for="skills">Skills:</label>
+            <div class="skill-input-group">
+                <input type="text" id="skillInput" placeholder="Add a skill">
+                <button type="button" id="addSkillButton">Add Skill</button>
+            </div>
+            <ul class="skill-list" id="skillsList"></ul>
+            <span class="error" id="skillsError"></span>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            let valid = true;
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const skillsList = document.getElementById('skillsList').children;
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+            const skillsError = document.getElementById('skillsError');
+
+            nameError.textContent = '';
+            emailError.textContent = '';
+            phoneError.textContent = '';
+            skillsError.textContent = '';
+
+            if (name.length < 2) {
+                nameError.textContent = 'Name must be at least 2 characters long.';
+                valid = false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                valid = false;
+            }
+
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+                valid = false;
+            }
+
+            if (skillsList.length === 0) {
+                skillsError.textContent = 'Please add at least one skill.';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById('addSkillButton').addEventListener('click', function() {
+            const skillInput = document.getElementById('skillInput');
+            const skill = skillInput.value.trim();
+
+            if (skill) {
+                const skillList = document.getElementById('skillsList');
+                const listItem = document.createElement('li');
+                listItem.textContent = skill;
+                skillList.appendChild(listItem);
+                skillInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
